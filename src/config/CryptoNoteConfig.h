@@ -26,7 +26,7 @@ const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V3         = 3 * DIFFICULTY_TA
 const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V4         = 6 * DIFFICULTY_TARGET;
 
 const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW             = 60;
-const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3          = 11;
+const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3          = 60;
 
 // MONEY_SUPPLY - total number coins to be generated
 const uint64_t MONEY_SUPPLY                                  = UINT64_C(1050000000000);
