@@ -208,8 +208,9 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
 
   void NodeServer::serialize(ISerializer& s) {
     uint8_t version = 1;
+    uuid network_id = m_network_id;
     s(version, "version");
-
+    s(network_id, "network_id");
     if (version != 1) {
       throw std::runtime_error("Unsupported version");
     }
@@ -574,11 +575,6 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
 
     if (rsp.node_data.network_id != m_network_id) {
       logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, wrong network! (" << rsp.node_data.network_id << "), closing connection.";
-      return false;
-    }
-
-    if (rsp.node_data.my_port != CryptoNote::P2P_DEFAULT_PORT) {
-      logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, wrong port connected! (" << rsp.node_data.my_port << "), closing connection.";
       return false;
     }
 
