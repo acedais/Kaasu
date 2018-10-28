@@ -578,6 +578,11 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
       return false;
     }
 
+    if (rsp.node_data.my_port != CryptoNote::P2P_DEFAULT_PORT) {
+      logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, wrong port connected! (" << rsp.node_data.my_port << "), closing connection.";
+      return false;
+    }
+
     if (rsp.node_data.version < CryptoNote::P2P_MINIMUM_VERSION) {
       logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, peer is wrong version! (" << std::to_string(rsp.node_data.version) << "), closing connection.";
       return false;
