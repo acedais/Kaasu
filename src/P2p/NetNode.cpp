@@ -213,7 +213,6 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
     if (version != 1) {
       throw std::runtime_error("Unsupported version");
     }
-
     s(m_peerlist, "peerlist");
     s(m_config.m_peer_id, "peer_id");
   }
@@ -575,6 +574,11 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
 
     if (rsp.node_data.network_id != m_network_id) {
       logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, wrong network! (" << rsp.node_data.network_id << "), closing connection.";
+      return false;
+    }
+
+    if (rsp.node_data.my_port != CryptoNote::P2P_DEFAULT_PORT) {
+      logger(Logging::DEBUGGING) << context << "COMMAND_HANDSHAKE Failed, wrong port connected! (" << rsp.node_data.my_port << "), closing connection.";
       return false;
     }
 
