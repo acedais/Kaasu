@@ -214,6 +214,9 @@ std::string print_peerlist_to_string(const std::list<PeerlistEntry>& pl) {
     if (version != 1) {
       throw std::runtime_error("Unsupported version");
     }
+    if (network_id != m_network_id) {
+      throw std::runtime_error("Wrong Network");
+    }
     s(m_peerlist, "peerlist");
     s(m_config.m_peer_id, "peer_id");
   }
